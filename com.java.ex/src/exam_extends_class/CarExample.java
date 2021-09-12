@@ -23,6 +23,8 @@ public class CarExample {
 				System.out.println("뒤오른쪽 금호타이어로 교체");
 				car.backRightTire= new KumhoTire("뒤오른쪽", 17);
 				break;
+			case 0:
+				return;
 			}
 			System.out.println("--------------------------------------------------");
 		}
