@@ -1,7 +1,5 @@
 package Contact_program;
 
-import java.util.Scanner;
-
 public class Contact {
 //	main
 //	getter,setter
@@ -73,61 +71,18 @@ public class Contact {
 		System.out.println("그룹: "+contact.getGroup());
 	}
 	
-	//입력 메소드
-	public Contact ScanFunc(Contact contact) {
-		Scanner scanner= new Scanner(System.in);
-		System.out.print("이름: "); String name =scanner.next();
-		System.out.print("전화번호: "); String phone =scanner.next();
-		System.out.print("이메일: "); String email =scanner.next();
-		System.out.print("주소: "); String address =scanner.next();
-		System.out.print("생일 "); String birthday =scanner.next();
-		System.out.print("그룹: "); String group =scanner.next();
-		contact.name=name;
-		contact.phone=phone;
-		contact.email=email;
-		contact.address=address;
-		contact.birthday=birthday;
-		contact.group=group;
-		return contact;
-	}
 
 	//회원정보 저장 메소드
-	public void save(Contact contact) {
-		for(int i=0; i<100; i++) {
-			if(SmartPhone.arr[i]==null) {
-				SmartPhone.arr[i]=contact;
-				break;
-			}
-			
-		}
-	}
-	//수정 메소드
-	public boolean update(String name, String newPhone) {
-		for(int i=0; i<100; i++) {
-			if(SmartPhone.arr[i]!=null &&SmartPhone.arr[i].getName().equals(name) ) {
-				SmartPhone.arr[i].setPhone(newPhone);
-				return true;
-			}
-		}
-		return false;
-	}
-	//삭제 메소드
-	public boolean delete(String name) {
-		for(int i=0; i<100; i++) {
-			if(SmartPhone.arr[i].getName().equals(name)) {
-				//떙겨주기
-				for (int k=i; !SmartPhone.arr[k+1].equals(null); k++) {
-					SmartPhone.arr[k]=SmartPhone.arr[k+1];
-				}
-				return true;
-
-			}
-			
-		}
-		return false;
-	}
-	
-
+//	public boolean save(Contact contact, int count) {
+//		for(int i=0; i<=count; i++) {
+//			if(SmartPhone.arr[i]==null) {
+//				SmartPhone.arr[i]=contact;
+//				//성공
+//				return true;
+//			}
+//		 //실패
+//		} return false;
+//	}
 	
 	
 	

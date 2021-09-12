@@ -10,6 +10,15 @@ public class CustomerContact extends Contact{
 	private String item;
 	private String positon;
 	
+	
+	public CustomerContact() {}
+	public CustomerContact(String name, String phone, String email, String address
+			, String birthday, String group, String accountName, String item, String positon) {
+		super();
+		this.accountName = accountName;
+		this.item = item;
+		this.positon = positon;
+	}
 	//재정의된 출력 메소드
 	@Override
 	public void PrintContact(Contact contact) {
@@ -21,22 +30,6 @@ public class CustomerContact extends Contact{
 		System.out.println("직급: "+customerContact.getPositon());
 		System.out.println("---------------------------");
 	}
-	//입력메소드
-		@Override
-		public Contact ScanFunc(Contact contact) {
-			Scanner scanner= new Scanner(System.in);
-			super.ScanFunc(contact);
-			//강제 형변환
-			CustomerContact customerContact= (CustomerContact)contact;
-			System.out.print("거래처 이름: "); String acoountName=scanner.next();
-			System.out.print("거래품목: "); String item =scanner.next();
-			System.out.println("직급: "); String position =scanner.next();
-			customerContact.accountName=acoountName;
-			customerContact.item= item;
-			customerContact.positon=position;
-			return customerContact;
-			
-		}
 	
 	
 	//getter & setter

@@ -8,83 +8,111 @@ public class SmartPhoneMain {
 	public static void main(String[] args) {
 		//스캐너 생성
 		Scanner scanner= new Scanner(System.in);
+		int count=ContactMain.main(args);
 		//개인정보 입력받기(기본 2번)
-		for(int i=0; i<2; i++) {
-			System.out.print("이름: "); String name =scanner.next();
-			System.out.print("전화번호: "); String phone =scanner.next();
-			System.out.print("이메일: "); String email =scanner.next();
-			System.out.print("주소: "); String address =scanner.next();
-			System.out.print("생일 "); String birthday =scanner.next();
-			System.out.println("그룹: "); String group =scanner.next();
-			
-			//contact 객체 생성해서 저장
-			Contact contact=new Contact(name, phone, email, address, birthday, group);
-			smartphone.save(contact);
-			System.out.println("데이터가 저장되었습니다.("+(i+1)+")");
-		}	
+		
+//		for(int i=0; i<2; i++) {
+//			System.out.print("이름: "); String name =scanner.next();
+//			System.out.print("전화번호: "); String phone =scanner.next();
+//			System.out.print("이메일: "); String email =scanner.next();
+//			System.out.print("주소: "); String address =scanner.next();
+//			System.out.print("생일 "); String birthday =scanner.next();
+//			System.out.print("그룹: "); String group =scanner.next();
+//			
+//			//contact 객체 생성해서 저장
+//			Contact contact=new Contact(name, phone, email, address, birthday, group);
+//			count++;
+//			smartphone.save(contact, count);
+//			System.out.println("데이터가 저장되었습니다.("+count+")");
+//		}	
 		
 		//메뉴
+		
+			
+		
 		while(true) {//무한반복
-			System.out.println("---------------------------------");
-			System.out.println("1. 연락처 등록");
-			System.out.println("2. 모든 연락처 출력");
-			System.out.println("3. 연락처 검색");
-			System.out.println("4. 연락처 삭제");
-			System.out.println("5. 연락처 수정");
-			System.out.println("6. 프로그래밍 종료");
-			int ch=scanner.nextInt();
+			System.out.println("---------------------------");
+			System.out.println("1. 회사 연락처 등록");
+			System.out.println("2. 거래처 연락처 등록");
+			System.out.println("3. 모든 연락처 출력");
+			System.out.println("4. 연락처 검색");
+			System.out.println("5. 연락처 삭제");
+			System.out.println("6. 연락처 수정");
+			System.out.println("7. 프로그래밍 종료");
+			String ch=scanner.next();
 			switch (ch) {
-				case 1:
-					System.out.print("이름: "); String name =scanner.next();
-					System.out.print("전화번호: "); String phone =scanner.next();
-					System.out.print("이메일: "); String email =scanner.next();
-					System.out.print("주소: "); String address =scanner.next();
-					System.out.print("생일 "); String birthday =scanner.next();
-					System.out.println("그룹: "); String group =scanner.next();
-					
+				case "1":
+					Contact companyContact1= new CompanyContact();
+					companyContact1=inputFunc(companyContact1);
+					CompanyContact companyContact2= (CompanyContact)companyContact1;
+					System.out.print("회사이름: "); companyContact2.setCompanyName(scanner.next());
+					System.out.print("부서이름: "); companyContact2.setTeamName(scanner.next());
+					System.out.print("직급: ");  companyContact2.setPositon(scanner.next());
+
 					//저장
-					Contact contact=new Contact(name, phone, email, address, birthday, group);
-					smartphone.save(contact);
-					System.out.println("데이터가 저장되었습니다.");
+					boolean firstResult=SmartPhone.save(companyContact2,count);
+					if (firstResult==true) {
+						count=count+1;
+						System.out.println("데이터가 저장되었습니다. ("+count+")");
+					System.out.println("---------------------------");}
+					
 					break;
 					
-				case 2:
+				case "2":
+					Contact customerContact1= new CustomerContact();
+					customerContact1=inputFunc(customerContact1);
+					CustomerContact customerContact2= (CustomerContact)customerContact1;
+					System.out.print("거래처이름: "); customerContact2.setAccountName(scanner.next());
+					System.out.print("거래품목: "); customerContact2.setItem(scanner.next());
+					System.out.print("직급: ");  customerContact2.setPositon(scanner.next());
+
+					//저장
+					boolean secondResult=SmartPhone.save(customerContact2,count);
+					if (secondResult==true) {
+						count=count+1;
+						System.out.println("데이터가 저장되었습니다. ("+count+")");
+					System.out.println("---------------------------");}
+					break;
+
+				case "3":
 					//전체출력
-					printAll();
+					SmartPhone.printAll(count);
 					break;
 					
-				case 3:
+				case "4":
 					//검색
 					System.out.println("검색할 연락처의 이름을 입력하세요");
 					String inputname1=scanner.next();
-					boolean result=search(inputname1);
-					if(result) System.out.println("연락처 검색 성공");
+					boolean searchResult=SmartPhone.search(inputname1, count);
+					if(searchResult) System.out.println("연락처 검색 성공");
 					else System.out.println("해당 연락처를 찾을 수 없습니다.");
 					
 					break;
 		
-				case 4:
+				case "5":
 					//삭제
 					System.out.println("삭제할 연락처의 이름을 입력하세요");
 					String inputname2=scanner.next();
-					boolean result2= smartphone.delete(inputname2);
-					if(result2) System.out.println("삭제 성공");
+					boolean deleteResult= SmartPhone.delete(inputname2,count);
+					count--;
+					if(deleteResult) System.out.println("삭제 성공");
 					else System.out.println("해당 연락처를 찾을 수 없습니다.");
 					break;
 		
-				case 5:
+				case "6":
 					//연락처 수정
 					System.out.println("수정할 연락처의 이름을 입력하세요");
 					String inputname3=scanner.next();
 					System.out.println("새로운 번호를 입력하세요");
 					String inputphone=scanner.next();
-					boolean result3= smartphone.update(inputname3, inputphone);
+					boolean result3= SmartPhone.update(inputname3, inputphone, count);
 					if(result3) System.out.println("수정 성공");
 					else System.out.println("해당 연락처를 찾을 수 없습니다.");
 					break;
 					
-				case 6:
+				case "7":
 					//프로그램 종료
+					System.out.println("프로그램이 종료됩니다.");
 					return;
 					
 				default:
@@ -94,35 +122,23 @@ public class SmartPhoneMain {
 		
 	}//me
 	
-	//전체 출력 메소드
-	public static void printAll() {
-		System.out.println(SmartPhone.arr[0].getName());
-		for(int i=0; i<100; i++) {
-			if(SmartPhone.arr[i]!=null) {
-				System.out.println("이름: "+SmartPhone.arr[i].getName());
-				System.out.println("번호: "+SmartPhone.arr[i].getPhone());
-				System.out.println("이메일: "+SmartPhone.arr[i].getEmail());
-				System.out.println("주소: "+SmartPhone.arr[i].getAddress());
-				System.out.println("생일: "+SmartPhone.arr[i].getBirthday());
-				System.out.println("그룹: "+SmartPhone.arr[i].getGroup());
-				System.out.println("---------------------------------");
-
-			}
-		}
-		return;
-	}
 	
-	//검색 메소드
-	public static boolean search(String name) {
-		for(int i=0; i<100; i++) {
-			if(SmartPhone.arr[i]!=null && SmartPhone.arr[i].getName().contentEquals(name)) {
-				System.out.println(name+"님의 연락처: "+ SmartPhone.arr[i].getPhone());
-				return true;
-				}
-			}
-			return false;
+	//입력 메소드
+	public static Contact inputFunc(Contact contact) {
+		Scanner scanner= new Scanner(System.in);
+		System.out.print("이름: "); String name =scanner.next();
+		System.out.print("전화번호: "); String phone =scanner.next();
+		System.out.print("이메일: "); String email =scanner.next();
+		System.out.print("주소: "); String address =scanner.next();
+		System.out.print("생일 "); String birthday =scanner.next();
+		System.out.print("그룹: "); String group =scanner.next();
+		contact.setName(name);
+		contact.setPhone(phone);
+		contact.setEmail(email);
+		contact.setAddress(address);
+		contact.setBirthday(birthday);
+		contact.setGroup(group);
+		return contact;
 	}
-	public void input_contact(Scanner scanner) {
-		
-	}
+
 }//ce
