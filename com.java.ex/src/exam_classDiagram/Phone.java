@@ -1,14 +1,17 @@
 package exam_classDiagram;
 
 public class Phone {
-	private int phones;
+	//폰번호
+	String phoneNum;
+	//이름
+	String name;
 
-	public int getPhones() {
-		return phones;
+	//생성자
+	public Phone(String phoneNum, String name) {
+		this.phoneNum = phoneNum;
+		this.name=name;
 	}
-
-	public void setPhones(int phones) {
-		this.phones = phones;
-	}
+	//빈 생성자
+	public Phone() {}
 	
 }

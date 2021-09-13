@@ -1,21 +1,18 @@
 package exam_classDiagram;
 
 public class Phone1 {
-	private int homePhones;
-	private int officePhones;
-	public int getHomePhone() {
-		return homePhones;
+	//폰번호
+	String phoneNum;
+	//이름
+	String name;
+
+	//생성자
+	public Phone1(String phoneNum, String name) {
+		this.phoneNum = phoneNum;
+		this.name=name;
 	}
-	public void setHomePhone(int homePhone) {
-		this.homePhones = homePhone;
-	}
-	public int getOfficePhone() {
-		return officePhones;
-	}
-	public void setOfficePhone(int officePhone) {
-		this.officePhones = officePhone;
-	}
-	
+	//빈 생성자
+	public Phone1() {}
 	
 	
 	
