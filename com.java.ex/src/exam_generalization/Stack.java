@@ -7,10 +7,10 @@ public class Stack {
 		vector.add(inputNum);
 	}
 	
-	public int pop() {
-		int top= vector.get();
+	public String pop() {
+		String top= vector.get();
 		vector.remove(top);
-		retrun top;
+		return top;
 	}
 
 }
