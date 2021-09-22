@@ -40,6 +40,7 @@ public class SmartPhoneMain {
 				break;
 			
 			case "7":
+				scanner.close();
 				return;
 				
 			default:
